@@ -1,0 +1,15 @@
+**/tags
+**/.tags
+**/.DS_Store
+**/*.sw?
+**/*.pyc
+**/__pycache__
+build/
+dist/
+*.egg-info/
+.idea
+.venv
+.mypy_cache
+.ruff_cache
+.vscode
+test/**/*.test
