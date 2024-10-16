@@ -5,28 +5,23 @@ PyBraces fixes that.
 
 ## TL;DR
 
-In:
+`$ pyb -c 'def fn(n): { for i in range(n): { print(f"Hello World {i}"); } } fn(5);'`
 
-```python
-def print_message(num_of_times): {
-    for i in range(num_of_times): {
-        print("Hello World!");
-    }
-}
-
-if __name__ == "__main__": {
-    print_message(10);
-}
+```
+Hello World 0
+Hello World 1
+Hello World 2
+Hello World 3
+Hello World 4
 ```
 
-Out:
+`$ pyb -t -c 'def fn(n): { for i in range(n): { print(f"Hello World {i}"); } } fn(5);'`
 
 ```python
-def print_message(num_of_times):
-    for i in range(num_of_times):
-        print("Hello World!")
-if __name__ == "__main__":
-    print_message(10)
+def fn(n):
+    for i in range(n):
+        print(f"Hello World {i}")
+fn(5)
 ```
 
 # Installation
@@ -42,7 +37,7 @@ pip install pybraces
 pyb -t < input.b.py > output.py
 
 # Transform oneliner script into Python
-pyb -t 'if 1: { if 2: { print(3) } }'
+pyb -t -c 'if 1: { if 2: { print(3) } }'
 
 # Execute oneliner script as Python
 pyb -c 'if 1: { if 2: { print(3) } }'
@@ -84,7 +79,7 @@ a = {"qwe": 123, "asd": 456}
 b = 5 in {1, 2, 3}
 ```
 
-## What's the standard extension for PyBraces?
+## What's the standard file extension for PyBraces?
 
 Although one-liners are not supposed to be saved in files, the suggested extension for PyBraces is
 `.b.py`. PyBraces syntax is not exactly Python but still close to it, so
