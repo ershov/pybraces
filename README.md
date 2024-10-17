@@ -34,13 +34,14 @@ pip install pybraces
 
 ```bash
 # Transform input.b.py to output.py
-pyb -t < input.b.py > output.py
+$ pyb -t < input.b.py > output.py
 
 # Transform oneliner script into Python
-pyb -t -c 'if 1: { if 2: { print(3) } }'
+$ pyb -t -c 'if 1: { if 2: { print(3) } }'
 
 # Execute oneliner script as Python
-pyb -c 'if 1: { if 2: { print(3) } }'
+$ pyb -c 'if 1: { if 2: { print(3) } }'
+$ pyb -c 'if 1: { if 2: print(3) }'
 ```
 
 # Description
@@ -57,6 +58,18 @@ In comparison to Bython, PyBraces doesn't require a special syntax for inline di
 The `pyb` command that comes with this package can be used to transform Python code with braces
 into Python code with indentation or to directly execute code as Python.
 It then passes all arguments to the Python interpreter.
+
+## Transformation Rules
+
+The transformation is done by the following rules:
+
+1. `: {...}` in indented appropriately, braces are removed.
+2. `: {...}` can be nested.
+3. `;` inserts a newline, this terminating the statement.
+5. `# comments` are removed.
+6. Newlines are replaced with a space.
+7. Everything inside of `[]` or `()` is pasted as is.
+8. Everything else is pasted as is.
 
 ## Why semicolon?
 

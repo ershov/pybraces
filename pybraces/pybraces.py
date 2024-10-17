@@ -2,7 +2,7 @@
 
 import regex
 
-PYBRACES_VERSION = "0.1.0"
+PYBRACES_VERSION = "0.1.1"
 
 _re_pybracetoken = r'''(?(DEFINE)
     (?<TOKEN>
@@ -62,18 +62,6 @@ def braces2py(txt: str, indent: str="    ") -> str:
             case "#":  # ignore comments
                 # spc = True
                 continue
-            case ":":
-                if match[0][-1] == "{":
-                    # if wantPass:  # it's an error but let's do our best
-                    #     ret.extend(("\n", indentStr, "if 1"))
-                    #     wantPass = False
-                    indentLevel += 1
-                    indentStr = indent * indentLevel
-                    eol, spc, wantPass = True, None, True
-                    ret.append(":")
-                    continue
-                else:
-                    continue # ignore standalone colon
             case "}":
                 if wantPass:
                     ret.extend(("\n", indentStr, "pass"))
@@ -87,6 +75,15 @@ def braces2py(txt: str, indent: str="    ") -> str:
                 if spc is False:
                     spc = True
             case _:
+                if match[0][0] == ":" and match[0][-1] == "{":
+                    # if wantPass:  # it's an error but let's do our best
+                    #     ret.extend(("\n", indentStr, "if 1"))
+                    #     wantPass = False
+                    indentLevel += 1
+                    indentStr = indent * indentLevel
+                    eol, spc, wantPass = True, None, True
+                    ret.append(":")
+                    continue
                 if eol:
                     eol, spc = False, False
                     ret.extend(("\n", indentStr))
