@@ -81,12 +81,12 @@ def braces2py(txt: str, indent: str="    ") -> str:
                     #     wantPass = False
                     indentLevel += 1
                     indentStr = indent * indentLevel
-                    eol, spc, wantPass = True, None, True
                     ret.append(":")
+                    eol, spc, wantPass = True, None, True
                     continue
                 if eol:
-                    eol, spc = False, False
                     ret.extend(("\n", indentStr))
+                    eol = False
                 elif spc:
                     ret.append(" ")
                 spc, wantPass = False, False
