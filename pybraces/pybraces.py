@@ -2,7 +2,7 @@
 
 import regex
 
-PYBRACES_VERSION = "0.1.1"
+PYBRACES_VERSION = "0.2.0"
 
 _re_pybracetoken = r'''(?(DEFINE)
     (?<TOKEN>
